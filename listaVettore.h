@@ -42,6 +42,81 @@ private:
 
 };
 
+template <class T>
+class orderedVectorList : public vectorList<T> {
+    public:
+        typedef typename vectorList<T>::valueType valueType;
+        typedef typename vectorList<T>::position position;
+
+        void insertOrdList(valueType);
+        void removeOrdList(position);          //si potrebbe eliminare
+        bool searchOrdList(valueType);
+        void mergeOrdList(orderedVectorList<T> &ordList, bool duplicati);
+    private:
+    vectorList<T> listaOrdinata;
+};
+
+template <class T>
+void orderedVectorList<T>::insertOrdList(orderedVectorList<T>::valueType elem) {
+    if(vectorList<T>::isEmpty()) {
+        vectorList<T>::insList(vectorList<T>::_begin(), elem);
+    } else if(!vectorList<T>::isEmpty()) {
+        position pos = vectorList<T>::_begin();
+        bool check = false;
+
+        while(!vectorList<T>::_end(pos) && check == false) {
+            if(elem < vectorList<T>::readList(pos)) {
+                vectorList<T>::insList(pos, elem);
+                check = true;
+            } else {
+                pos = vectorList<T>::next(pos);
+            }
+        }
+
+        if(vectorList<T>::_end(pos)) {
+            vectorList<T>::insList(pos, elem);
+        }
+    }
+}
+
+template <class T>
+void orderedVectorList<T>::removeOrdList(orderedVectorList<T>::position pos) {
+    vectorList<T>::delList(pos);
+}
+
+template <class T>
+bool orderedVectorList<T>::searchOrdList(orderedVectorList<T>::valueType elem) {
+    position pos = vectorList<T>::_begin();
+    bool check = false;
+
+    while(!vectorList<T>::_end(pos) && check == false) {
+        if(vectorList<T>::readList(pos) == elem) {
+            check = true;
+        }
+
+        pos = vectorList<T>::next(pos);
+    }
+
+    return check;
+}
+
+template <class T>
+void orderedVectorList<T>::mergeOrdList(orderedVectorList<T> &ordList, bool duplicati) {
+    position pos = ordList._begin();
+
+    while(!ordList._end(pos)) {
+        if(searchOrdList(ordList.readList(pos))) {
+            if(duplicati == true) {
+                insertOrdList(ordList.readList(pos));
+            }
+        } else {
+            insertOrdList(ordList.readList(pos));
+        }
+
+        pos = ordList.next(pos);
+    }
+}
+
 //operazione di copia
 template <class T>
 vectorList<T>& vectorList<T>::operator=(const vectorList<T> &l) {
@@ -236,4 +311,33 @@ void vectorList<T>::fillList(vectorList<T>::valueType &noc) {
         } else cout << "le due liste sono diverse" << endl;
     }
     else cout << "le due liste sono vuote" << endl;
+
+    //liste vettoriali ordinate
+
+    orderedVectorList<int> lisa;
+    orderedVectorList<int> bart;
+
+    lisa.insertOrdList(15);
+    lisa.insertOrdList(21);
+    lisa.insertOrdList(17);
+    lisa.insertOrdList(14);
+
+    bart.insertOrdList(9);
+    bart.insertOrdList(51);
+    bart.insertOrdList(21);
+    bart.insertOrdList(0);
+
+    lisa.delList(lisa._begin());
+
+    cout << lisa << endl;
+    cout << bart << endl;
+
+    lisa.mergeOrdList(bart, true);
+
+    cout << lisa << endl;
+
+    int x = 15;
+    if(lisa.searchOrdList(x)) {
+        cout << "il valore e' presente" << endl;
+    } else cout << "il valore NON e' presente" << endl;
 */

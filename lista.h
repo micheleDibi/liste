@@ -27,10 +27,10 @@ public:
 
     int listSize() const;
     void invertireLista();
-    bool palindroma() const;                        //verifica se una lista è palindroma
+    bool palindroma() const;                          //verifica se una lista è palindroma
 
-    //virtual void clearList();                               //svuota la lista
-    int numElements(position, position);            //calcola il numero di elementi presenti dalla pos x alla posizione y - accertarsi che x > y
+    //virtual void clearList();                       //svuota la lista
+    //int numElements(position, position);            //calcola il numero di elementi presenti dalla pos x alla posizione y - accertarsi che x > y
     //void exchangeElements(position, position);      //cambia la posizione del elemento in pos x con quello in posizione y - non è necessario che x > y
     //void moveMinAndMax();                           //inserisce il minimo in prima posizione e il minimo in ultima posizione
 } ;
@@ -78,32 +78,6 @@ bool linearList<T, P>::palindroma() const {
     }
 
     return true;
-}
-
-template <class T, class P>
-int linearList<T, P>::numElements(linearList<T, P>::position x, linearList<T, P>::position y) {
-    /**
-        casi possibili di input:
-        . x > y -> distanza = counter
-        . x == y -> distanza = 0;
-        .y > x -> invertire le posizioni poi vedi 'x > y'
-    */
-
-    int counter = 0;
-
-    //implementare confronto tra posizioni di puntatori
-    if(y > x) {
-        linearList<T, P>::position pos = x;
-        x = y;
-        auto y = pos;
-    }
-
-    while(x != y) {
-        x = next(x);
-        counter++;
-    }
-
-    return counter;
 }
 
 template <class T, class P>
