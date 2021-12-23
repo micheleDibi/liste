@@ -21,13 +21,13 @@ public:
     void createList();
     bool isEmpty() const;
     valueType readList(position) const;
-    void writeList(position, valueType&);
+    void writeList(position, valueType);
     position _begin() const;
     position _last() const;
     bool _end(position) const;
     position next(position) const;
     position prec(position) const;
-    void insList(position, valueType&);
+    void insList(position, valueType);
     void delList(position);
     void fillList(valueType&);
 
@@ -200,7 +200,7 @@ typename vectorList<T>::valueType vectorList<T>::readList(vectorList<T>::positio
 }
 
 template <class T>
-void vectorList<T>::writeList(vectorList<T>::position pos, vectorList<T>::valueType &e) {
+void vectorList<T>::writeList(vectorList<T>::position pos, vectorList<T>::valueType e) {
     if((pos > 0) && (pos < lenght+1)) {
         elements[pos - 1] = e;
     }
@@ -223,7 +223,7 @@ bool vectorList<T>::_end(vectorList<T>::position pos) const{
             return true;
         else
             return false;
-    }
+    } else return false;
 }
 
 template <class T>
@@ -241,7 +241,7 @@ typename vectorList<T>::position vectorList<T>::prec(vectorList<T>::position pos
 }
 
 template <class T>
-void vectorList<T>::insList(vectorList<T>::position pos, vectorList<T>::valueType &e) {
+void vectorList<T>::insList(vectorList<T>::position pos, vectorList<T>::valueType e) {
     if((pos > 0) && (pos <= lenght + 1)) {
         for (int i = lenght; i >= pos; i--) {
             elements[i] = elements[i - 1];

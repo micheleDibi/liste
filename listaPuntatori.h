@@ -33,13 +33,13 @@ public:
     void createList();
     bool isEmpty() const;
     valueType readList(position) const;
-    void writeList(position, valueType&);
+    void writeList(position, valueType);
     position _begin() const;
     position _last() const;
     bool _end(position) const;
     position next(position) const;
     position prec(position) const;
-    void insList(position, valueType&);
+    void insList(position, valueType);
     void delList(position);
     void fillList(valueType&);
 
@@ -143,9 +143,7 @@ linkedList<T>::~linkedList() {
 }
 
 template <class T>
-void linkedList<T>::createList() {
-
-}
+void linkedList<T>::createList() {}
 
 template <class T>
 bool linkedList<T>::isEmpty() const{
@@ -162,7 +160,7 @@ typename linkedList<T>::valueType linkedList<T>::readList(linkedList<T>::positio
 }
 
 template <class T>
-void linkedList<T>::writeList(linkedList<T>::position pos, linkedList<T>::valueType &e) {
+void linkedList<T>::writeList(linkedList<T>::position pos, linkedList<T>::valueType e) {
     if(!_end(pos)) {
         pos->nvalue = e;
     }
@@ -198,7 +196,7 @@ typename linkedList<T>::position linkedList<T>::prec(linkedList<T>::position pos
 }
 
 template <class T>
-void linkedList<T>::insList(linkedList<T>::position pos, linkedList<T>::valueType &e) {
+void linkedList<T>::insList(linkedList<T>::position pos, linkedList<T>::valueType e) {
     position posSupp = new node<T>;
     posSupp->nvalue = e;
 

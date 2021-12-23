@@ -16,22 +16,22 @@ public:
     virtual void createList() = 0;
     virtual bool isEmpty()const = 0;
     virtual valueType readList(position) const = 0;
-    virtual void writeList(position, valueType&) = 0;
+    virtual void writeList(position, valueType) = 0;
     virtual position _begin() const = 0;
     virtual position _last() const = 0;
     virtual bool _end(position) const = 0;
     virtual position next(position) const = 0;
     virtual position prec(position) const = 0;
-    virtual void insList(position, valueType&) = 0;
+    virtual void insList(position, valueType) = 0;
     virtual void delList(position) = 0;
 
     int listSize() const;
     void invertireLista();
-    bool palindroma() const;                          //verifica se una lista è palindroma
+    bool palindroma() const;                          //verifica se una lista e' palindroma
 
     //virtual void clearList();                       //svuota la lista
     //int numElements(position, position);            //calcola il numero di elementi presenti dalla pos x alla posizione y - accertarsi che x > y
-    //void exchangeElements(position, position);      //cambia la posizione del elemento in pos x con quello in posizione y - non è necessario che x > y
+    //void exchangeElements(position, position);      //cambia la posizione del elemento in pos x con quello in posizione y - non ï¿½ necessario che x > y
     //void moveMinAndMax();                           //inserisce il minimo in prima posizione e il minimo in ultima posizione
 } ;
 
